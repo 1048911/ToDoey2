@@ -9,15 +9,23 @@
 import UIKit
 
 class TodoeyViewController: UITableViewController {
+   
+    //MARK: Declare variables and constants here
     
     var textfield = UITextField()
+    var itemArray = ["Go to store." ,"Fight store clerk." ,"Return home."]
+    var defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
     }
     
-    var itemArray = ["Go to store." ,"Fight store clerk." ,"Return home."]
+  //MARK:- TableView Delegate Methods
+
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoListCell", for: indexPath)
@@ -48,7 +56,7 @@ class TodoeyViewController: UITableViewController {
         }
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             self.itemArray.append(self.textfield.text!)
-            
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
             self.tableView.reloadData()
         }
         alert.addAction(action)
