@@ -14,33 +14,29 @@ class TodoeyViewController: UITableViewController {
     
     var textfield = UITextField()
     var itemArray = [Item]()
-    var defaults = UserDefaults.standard
+   
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-     //   if let items = defaults.array(forKey: "TodoListArray") as? [String] {
-       //     itemArray = items
-       // }
-            let newItem = Item()
-            newItem.title = "Find Mike"
-            itemArray.append(newItem)
-       
-            let newItem2 = Item()
-            newItem2.title = "Find Thomas"
-            itemArray.append(newItem2)
+     
         
-            let newItem3 = Item()
-            newItem3.title = "Find Carl"
-            itemArray.append(newItem3)
+     
+         
+        
+        loadData()
     }
     
   //MARK:- TableView Delegate Methods
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoListCell", for: indexPath)
+       
         let item = itemArray[indexPath.row]
+        
         cell.textLabel?.text = item.title
        
         cell.accessoryType = item.done ? .checkmark : .none
@@ -61,6 +57,7 @@ class TodoeyViewController: UITableViewController {
         
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
         tableView.reloadData()
     }
     
@@ -69,25 +66,55 @@ class TodoeyViewController: UITableViewController {
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "Add New To Do List Item", message: "", preferredStyle: .alert)
+        
         alert.addTextField { (alertTextfield) in
+            
             alertTextfield.placeholder =
             "Create new item"
+            
             self.textfield = alertTextfield
         }
        
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             let newItem = Item()
+           
             newItem.title = self.textfield.text!
+            
             self.itemArray.append(newItem)
-            self.defaults.set(self.itemArray, forKey: "TodoListArray")
-            self.tableView.reloadData()
+            self.saveData()
         }
         
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
 
-
+//MARK:- Model Manipulation Methods
     
+    func saveData(){
+        let encoder = PropertyListEncoder()
+        
+        
+        do {
+            let data = try encoder.encode(self.itemArray)
+            try data.write(to: self.dataFilePath!)
+        } catch {
+            print("Error encoding array: \(error)")
+            
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    func loadData() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            do { itemArray =  try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding array: \(error)")
+            }
+        }
+        
+    }
+
 }
 
