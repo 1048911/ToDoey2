@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+
 
 class TodoeyViewController: UITableViewController {
    
@@ -14,6 +16,7 @@ class TodoeyViewController: UITableViewController {
     
     var textfield = UITextField()
     var itemArray = [Item]()
+     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
    
  
     
@@ -76,9 +79,10 @@ class TodoeyViewController: UITableViewController {
         }
        
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            let newItem = Item()
+            let newItem = Item(context: self.context)
            
             newItem.title = self.textfield.text!
+            newItem.done = false
             
             self.itemArray.append(newItem)
             self.saveData()
@@ -91,30 +95,29 @@ class TodoeyViewController: UITableViewController {
 //MARK:- Model Manipulation Methods
     
     func saveData(){
-        let encoder = PropertyListEncoder()
+   
         
         
         do {
-            let data = try encoder.encode(self.itemArray)
-            try data.write(to: self.dataFilePath!)
+            try context.save()
         } catch {
-            print("Error encoding array: \(error)")
+            print("Error saving data: \(error)")
             
         }
         
         self.tableView.reloadData()
     }
     
-    func loadData() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do { itemArray =  try decoder.decode([Item].self, from: data)
+    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest) {
+        
+            do {
+                itemArray =  try context.fetchRequest(request)
             } catch {
-                print("Error decoding array: \(error)")
+                print("Error loading data: \(error)")
             }
         }
         
     }
 
-}
+
 
