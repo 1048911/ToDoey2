@@ -12,7 +12,6 @@
 		8D43342122492DBD0025C40E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D43341F22492DBD0025C40E /* Main.storyboard */; };
 		8D43342322492DC00025C40E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D43342222492DC00025C40E /* Assets.xcassets */; };
 		8D43342622492DC00025C40E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D43342422492DC00025C40E /* LaunchScreen.storyboard */; };
-		8D43343122552CDD0025C40E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D43343022552CDD0025C40E /* Item.swift */; };
 		8DCC87AF225A882200759CE0 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC87AD225A882200759CE0 /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +23,6 @@
 		8D43342222492DC00025C40E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D43342522492DC00025C40E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D43342722492DC00025C40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D43343022552CDD0025C40E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		8DCC87AE225A882200759CE0 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,7 +94,6 @@
 		8D43343222552CFD0025C40E /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				8D43343022552CDD0025C40E /* Item.swift */,
 				8DCC87AD225A882200759CE0 /* DataModel.xcdatamodeld */,
 			);
 			path = "Data Model";
@@ -175,7 +172,6 @@
 			files = (
 				8D43341E22492DBD0025C40E /* TodoeyViewController.swift in Sources */,
 				8DCC87AF225A882200759CE0 /* DataModel.xcdatamodeld in Sources */,
-				8D43343122552CDD0025C40E /* Item.swift in Sources */,
 				8D43341C22492DBD0025C40E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
