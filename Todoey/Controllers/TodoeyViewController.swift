@@ -95,8 +95,6 @@ class TodoeyViewController: UITableViewController {
 //MARK:- Model Manipulation Methods
     
     func saveData(){
-   
-        
         
         do {
             try context.save()
@@ -108,16 +106,49 @@ class TodoeyViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest) {
+    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
         
-            do {
-                itemArray =  try context.fetchRequest(request)
+        // let request : NSFetchRequest<Item> = Item.fetchRequest()
+        
+        do {
+                itemArray =  try context.fetch(request)
             } catch {
                 print("Error loading data: \(error)")
             }
+        tableView.reloadData()
         }
+    
+    }
+
+extension TodoeyViewController : UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+       
+        request.predicate = predicate
+     
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+     
+        loadData(with: request)
         
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text?.count == 0 {
+            
+            loadData()
+            
+            DispatchQueue.main.async {
+                 searchBar.resignFirstResponder()
+            }
+        }
+    }
+    
+}
 
 
 
