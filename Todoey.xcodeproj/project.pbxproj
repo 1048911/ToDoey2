@@ -13,6 +13,7 @@
 		8D43342322492DC00025C40E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D43342222492DC00025C40E /* Assets.xcassets */; };
 		8D43342622492DC00025C40E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D43342422492DC00025C40E /* LaunchScreen.storyboard */; };
 		8DCC87AF225A882200759CE0 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC87AD225A882200759CE0 /* DataModel.xcdatamodeld */; };
+		8DD3AE7F2266723F00309079 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3AE7E2266723F00309079 /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8D43342522492DC00025C40E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D43342722492DC00025C40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DCC87AE225A882200759CE0 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		8DD3AE7E2266723F00309079 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		8D43342D22552C040025C40E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8DD3AE7E2266723F00309079 /* CategoryViewController.swift */,
 				8D43341D22492DBD0025C40E /* TodoeyViewController.swift */,
 				8D43343222552CFD0025C40E /* Data Model */,
 			);
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DD3AE7F2266723F00309079 /* CategoryViewController.swift in Sources */,
 				8D43341E22492DBD0025C40E /* TodoeyViewController.swift in Sources */,
 				8DCC87AF225A882200759CE0 /* DataModel.xcdatamodeld in Sources */,
 				8D43341C22492DBD0025C40E /* AppDelegate.swift in Sources */,
