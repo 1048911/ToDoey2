@@ -126,8 +126,8 @@
 		8D43343222552CFD0025C40E /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				8D6A465322722FBE00611C76 /* Category.swift */,
 				8D6A46552272302200611C76 /* Item.swift */,
+				8D6A465322722FBE00611C76 /* Category.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
