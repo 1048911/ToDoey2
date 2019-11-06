@@ -17,18 +17,16 @@ class CategoryViewController: SwipeTableViewController {
     var categories : Results<Category>?
 
     
-    var textfield = UITextField()
-   
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         tableView.separatorStyle = .none
+        
+        tableView.separatorStyle = .none
       
        loadData()
         
-       
     }
+   
     override func viewWillAppear(_ animated: Bool) {
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist.")}
         
@@ -48,29 +46,29 @@ class CategoryViewController: SwipeTableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added Yet"
-        
+
         guard let colorName = categories?[indexPath.row].color else {fatalError("No Category found!") }
-            
+
             cell.backgroundColor = UIColor(hexString: colorName)
         guard let chosenColor = cell.backgroundColor else {fatalError("Cell has no background color!")}
-        
-        
+
+
         cell.textLabel?.textColor = ContrastColorOf(chosenColor, returnFlat: true)
-        
-       
+
+
         print("\(String(describing: cell.textLabel?.text))")
-        
-      
-        
+
+
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return categories?.count ?? 1
-         
+
     }
    
     
@@ -96,37 +94,38 @@ class CategoryViewController: SwipeTableViewController {
     
     //MARK:- IB ACTIONS METHODS
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Add New To Do List Category", message: "Add Category", preferredStyle: .alert)
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+
+            var textfield = UITextField()
+         
+         let alert = UIAlertController(title: "Add New To Do List Category", message: "Add Category", preferredStyle: .alert)
+
+
+         
+         let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
+             let newCategory = Category()
+             newCategory.name = textfield.text!
+             let arrayColors : [UIColor] = [FlatLime(), FlatOrange(), FlatSkyBlue(), FlatMint(), FlatWatermelon()]
+             if let randomColor = UIColor.init(randomColorIn: arrayColors){
+                 newCategory.color = randomColor.hexValue()
+             }
+             
+             // newCategory.done = false
+             self.saveData(newCategory)
+         }
+            alert.addAction(action)
         
-        alert.addTextField { (field) in
-            
-            field.placeholder = "Create New Category"
-            
-            self.textfield = field
-        }
-        
-        
-        let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
-            
-            let newCategory = Category()
-            newCategory.name = self.textfield.text!
-            let arrayColors : [UIColor] = [FlatLime(), FlatOrange(), FlatSkyBlue(), FlatMint(), FlatWatermelon()]
-            if let randomColor = UIColor.init(randomColorIn: arrayColors){
-                newCategory.color = randomColor.hexValue()
-            }
-            
-            // newCategory.done = false
-            
-            
-            self.saveData(newCategory)
-        }
-        
-        alert.addAction(action)
-        
-        present(alert, animated: true, completion: nil)
+         alert.addTextField { (field) in
+             textfield = field
+                    field.placeholder = "Create New Category"
+                }
+         
+         present(alert, animated: true, completion: nil)
     }
     
+    
+       
     //MARK:- DATA MANIPULATION METHODS
     
     func saveData(_ category:Category){

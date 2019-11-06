@@ -2,9 +2,7 @@
 //  AppDelegate.swift
 //  Todoey
 //
-//  Created by CASE on 3/25/19.
-//  Copyright © 2019 CASE. All rights reserved.
-//
+
 
 import UIKit
 
